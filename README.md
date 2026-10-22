@@ -1,6 +1,12 @@
 # Desafio Prompt Injection
 
-Desafio interativo de Segurança da Informação sobre **prompt injection**, em 6 etapas. Cada etapa tem um tipo de desafio diferente e, depois de cada resposta, aparece uma explicação educativa do item. No fim, a pessoa recebe um **score de segurança de 0 a 100**, calculado pela quantidade de acertos.
+Desafio interativo de Segurança da Informação sobre **prompt injection**, feito para uso em aula com vários alunos ao mesmo tempo.
+
+1. **Objetivo e Taxonomia de Bloom:** a tela inicial mostra o objetivo do desafio e os níveis da Taxonomia de Bloom Revisada trabalhados. O nível que se deseja alcançar é o **Criar**.
+2. **Apelido:** antes de começar, cada aluno escolhe um apelido (de 2 a 20 caracteres). Há um aviso para não usar dados pessoais.
+3. **6 etapas:** cada uma com um tipo de desafio diferente e uma explicação educativa depois de cada resposta.
+4. **Score de 0 a 100:** `acertos ÷ 6 × 100`, arredondado. Faixas: 80–100 *Bem defendido*, 50–79 *Em alerta*, 0–49 *Exposto*.
+5. **Ranking da turma:** mostra o melhor score de cada apelido. Em caso de empate, fica na frente quem terminou mais rápido. O ranking se atualiza sozinho a cada 15 segundos.
 
 | Etapa | Tipo de desafio | Nível de Bloom |
 | --- | --- | --- |
@@ -11,18 +17,34 @@ Desafio interativo de Segurança da Informação sobre **prompt injection**, em 
 | 5 | Avalie o risco (comparar integrações) | Avaliar |
 | 6 | Ordene o fluxo seguro (ordenação) | Criar |
 
-**Score:** `acertos ÷ 6 × 100`, arredondado. Faixas: 80–100 *Bem defendido*, 50–79 *Em alerta*, 0–49 *Exposto*.
+## Endereços úteis em aula
 
-É um site estático (um único `index.html`, sem servidor e sem dependências para instalar). Nenhuma resposta sai do navegador de quem joga.
+- Desafio: `https://<usuario>.github.io/<repositorio>/`
+- Ranking em tela cheia, para projetar no Meet: acrescente `?ranking` ao endereço.
+- Ranking separado por turma: acrescente `?turma=nome-da-turma` (por exemplo, `?turma=novembro`). Para ver o ranking dessa turma, use `?turma=novembro&ranking`.
+
+## Ranking compartilhado (planilha Google)
+
+O GitHub Pages só hospeda arquivos. Por isso, o ranking grava as tentativas numa planilha do Google por meio de um pequeno script (`apps-script/Code.gs`). Enquanto o script não estiver configurado, o ranking funciona só no próprio dispositivo de cada aluno.
+
+1. Crie (ou abra) uma planilha do Google para o ranking.
+2. Menu **Extensões → Apps Script**. Apague o conteúdo do editor, cole o arquivo `apps-script/Code.gs` e salve.
+3. Clique em **Implantar → Nova implantação**. Em "Selecionar tipo", escolha **App da Web**.
+4. Configure **Executar como: Eu** e **Quem pode acessar: Qualquer pessoa**. Clique em **Implantar** e autorize o acesso. Se o Google mostrar "app não verificado", clique em *Avançado → Acessar*: o script é seu e só mexe nessa planilha.
+5. Copie a **URL do app da Web** (termina em `/exec`).
+6. No `index.html`, procure `/*RANKING_URL*/` e coloque a URL entre as aspas: `url: 'https://script.google.com/macros/s/.../exec' /*RANKING_URL*/,`.
+
+Para zerar o ranking antes de uma aula, rode a função `limparRanking` no editor do Apps Script. A planilha guarda todas as tentativas (data, turma, apelido, score, acertos, tempo).
+
+**Limites:** o score é calculado no navegador do aluno. O script recalcula o score a partir dos acertos, mas alguém com conhecimento técnico ainda poderia enviar um resultado falso. Para um jogo em aula isso basta; para nota oficial, não.
 
 ## Publicar no GitHub Pages
 
-1. Crie um repositório **público** no GitHub (por exemplo, `desafio-prompt-injection`).
-2. Envie para a raiz do repositório os arquivos `index.html`, `.nojekyll` e `README.md`.
-3. No repositório, abra **Settings → Pages**.
-4. Em **Build and deployment → Source**, escolha **Deploy from a branch**; em **Branch**, escolha `main` e a pasta `/ (root)`. Clique em **Save**.
-5. Depois de 1 a 2 minutos, o desafio fica disponível em `https://<seu-usuario>.github.io/<nome-do-repositorio>/`.
+1. Envie para a raiz de um repositório **público** os arquivos `index.html`, `.nojekyll`, `README.md` e a pasta `apps-script`.
+2. No repositório, abra **Settings → Pages**.
+3. Em **Build and deployment → Source**, escolha **Deploy from a branch**. Em **Branch**, escolha `main` e a pasta `/ (root)`. Clique em **Save**.
+4. Depois de 1 a 2 minutos, o desafio fica disponível em `https://<usuario>.github.io/<repositorio>/`.
 
 ## Editar perguntas e explicações
 
-Todo o conteúdo fica no início do `<script>` do `index.html`, na lista `STAGES`. Cada etapa tem `title`, `options` (marque a certa com `correct: true`) e `explain` (as partes da explicação). As faixas do score ficam logo abaixo, em `LEVELS`.
+Todo o conteúdo fica no `<script>` do `index.html`. O objetivo e os níveis de Bloom ficam em `OBJECTIVE` e `BLOOM`. As etapas ficam em `STAGES`: cada etapa tem `title`, `options` (marque a certa com `correct: true`) e `explain` (as partes da explicação). As faixas do score ficam em `LEVELS`.
