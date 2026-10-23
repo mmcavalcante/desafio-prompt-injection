@@ -13,6 +13,9 @@
  * ranking mostra o melhor score de cada apelido.
  */
 
+// Vazio quando o script é colado dentro da planilha (Extensões → Apps Script).
+// Num projeto avulso, coloque aqui o ID da planilha (o trecho da URL entre /d/ e /edit).
+var SHEET_ID = '';
 var HEADERS = ['data', 'turma', 'apelido', 'score', 'acertos', 'etapas', 'tempo_seg', 'id_tentativa'];
 var MAX_LINHAS_RANKING = 50;
 var CACHE_SEGUNDOS = 5;
@@ -116,7 +119,8 @@ function compara_(a, b) {
 }
 
 function planilha_() {
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheets()[0];
   if (sh.getLastRow() === 0) sh.appendRow(HEADERS);
   return sh;
 }
@@ -127,7 +131,7 @@ function cleanNick_(s) {
 }
 
 function cleanTurma_(t) {
-  var v = String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  var v = String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30);
   return v || 'geral';
 }

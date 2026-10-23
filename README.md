@@ -17,6 +17,10 @@ Desafio interativo de Segurança da Informação sobre **prompt injection**, fei
 | 5 | Avalie o risco (comparar integrações) | Avaliar |
 | 6 | Ordene o fluxo seguro (ordenação) | Criar |
 
+## Instalar no celular ou no computador
+
+Publicado no GitHub Pages, o desafio também pode ser instalado como app (PWA). No Chrome ou no Edge, aparece o link "Instalar o desafio neste aparelho" no rodapé, ou o ícone de instalar na barra de endereço. No iPhone, use Safari → Compartilhar → "Adicionar à Tela de Início". Com internet, o app sempre carrega a versão mais nova. Sem internet, abre a última versão guardada, mas o ranking só funciona on-line.
+
 ## Endereços úteis em aula
 
 - Desafio: `https://<usuario>.github.io/<repositorio>/`
@@ -40,7 +44,7 @@ Para zerar o ranking antes de uma aula, rode a função `limparRanking` no edito
 
 ## Publicar no GitHub Pages
 
-1. Envie para a raiz de um repositório **público** os arquivos `index.html`, `.nojekyll`, `README.md` e a pasta `apps-script`.
+1. Envie para a raiz de um repositório **público** os arquivos `index.html`, `manifest.webmanifest`, `sw.js`, `.nojekyll`, `README.md` e as pastas `icons` e `apps-script`.
 2. No repositório, abra **Settings → Pages**.
 3. Em **Build and deployment → Source**, escolha **Deploy from a branch**. Em **Branch**, escolha `main` e a pasta `/ (root)`. Clique em **Save**.
 4. Depois de 1 a 2 minutos, o desafio fica disponível em `https://<usuario>.github.io/<repositorio>/`.

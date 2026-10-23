@@ -10,6 +10,9 @@
 <meta property="og:description" content="6 etapas, explicação após cada resposta, score de 0 a 100 e ranking da turma.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.4 5.1 12.9 12 15 6.9-2.1 12-7.6 12-15V7z' fill='%231E4FD8'/%3E%3Cpath d='m10.5 16 4 4 7-8' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-title" content="Prompt Injection">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
 <title>Desafio Prompt Injection</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -443,7 +446,8 @@
   .recap .explain{padding:2px 16px 16px}
 
   .foot{border-top:1px solid var(--rule)}
-  .foot .wrap{padding-block:16px 28px; font-size:13px; color:var(--ink-soft)}
+  .foot .wrap{padding-block:16px 28px; font-size:13px; color:var(--ink-soft); display:flex; flex-direction:column; gap:8px}
+  .install-row:has(> [hidden]){display:none}
 
   @media (max-width:640px){
     .options.cards{grid-template-columns:1fr}
@@ -481,6 +485,7 @@
 <footer class="foot">
   <div class="wrap">
     <p>Material de apoio da aula de Segurança da Informação sobre prompt injection. O ranking guarda só o apelido, o score, os acertos e o tempo de cada tentativa; suas respostas em cada etapa ficam no seu navegador.</p>
+    <p class="install-row"><button class="link-btn" type="button" id="installBtn" hidden>Instalar o desafio neste aparelho</button></p>
   </div>
 </footer>
 
@@ -708,7 +713,7 @@
   }
 
   function cleanTurma(t) {
-    var v = String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    var v = String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       .replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 30);
     return v || 'geral';
   }
@@ -1413,9 +1418,29 @@
     startPolling(rv.load);
   }
 
+  /* ---------- instalação como app (quando publicado no github.io) ---------- */
+  var installBtn = document.getElementById('installBtn');
+  var installPrompt = null;
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    installPrompt = e;
+    installBtn.hidden = false;
+  });
+  installBtn.addEventListener('click', function () {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    installPrompt.userChoice.then(function () { installPrompt = null; installBtn.hidden = true; }, function () {});
+  });
+  window.addEventListener('appinstalled', function () { installBtn.hidden = true; });
+
   if (params.has('ranking') || window.location.hash === '#ranking') renderRanking();
   else renderIntro();
 })();
+</script>
+<script>
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); });
+}
 </script>
 </body>
 </html>
