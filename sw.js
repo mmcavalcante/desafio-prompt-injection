@@ -2,7 +2,7 @@
    Estratégia "rede primeiro": com internet, sempre busca a versão mais nova
    (nada de versão velha durante a aula); sem internet, usa a cópia guardada.
    O ranking (script.google.com) e as fontes não passam por aqui. */
-var CACHE = 'dpi-db44b820cd';
+var CACHE = 'dpi-e459c5e9ef';
 var ASSETS = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', function (e) {
