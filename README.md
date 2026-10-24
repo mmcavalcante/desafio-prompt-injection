@@ -3,7 +3,7 @@
 Desafio interativo de Segurança da Informação sobre **prompt injection**, feito para uso em aula com vários alunos ao mesmo tempo.
 
 1. **Objetivo e Taxonomia de Bloom:** a tela inicial mostra o objetivo do desafio e os níveis da Taxonomia de Bloom Revisada trabalhados. O nível que se deseja alcançar é o **Criar**.
-2. **Vídeo de abertura:** um trecho de 55 s (0:10 a 1:05) do vídeo *Is Your LLM safe from prompt injection?*, do canal oficial do Google Cloud, que explica o que é prompt injection com uma analogia e exemplos reais. O vídeo é em inglês, com legenda (dá para traduzir para português nas configurações do player), e a página traz um resumo em português. Ele toca dentro da página.
+2. **Vídeo de abertura:** um trecho de 2 min (2:26 a 4:26) do vídeo *Prompt Injection: Entenda o ataque e a remediação*, da Guardsi Cybersecurity, em português, que explica os dois tipos de prompt injection (direta e indireta). A página traz um resumo de cada tipo, e o vídeo toca dentro dela.
 3. **Apelido:** antes de começar, cada aluno escolhe um apelido (de 2 a 20 caracteres). Há um aviso para não usar dados pessoais.
 4. **6 etapas:** cada uma com um tipo de desafio diferente e uma explicação educativa depois de cada resposta.
 5. **Score de 0 a 100:** `acertos ÷ 6 × 100`, arredondado. Faixas: 80–100 *Bem defendido*, 50–79 *Em alerta*, 0–49 *Exposto*.

@@ -531,18 +531,18 @@
      OBJETIVO E TAXONOMIA DE BLOOM
      ========================================================== */
   /* Vídeo de abertura: curto (até 2 min) e de fonte de referência. */
-  // Trecho de 0:10 a 1:05: só a explicação de prompt injection, sem a parte sobre o produto.
+  // Trecho de 2:26 a 4:26: a explicação dos dois tipos de prompt injection (direta e indireta).
   var VIDEO = {
-    id: 'zviPaxJDlu4',
-    title: 'Is Your LLM safe from prompt injection?',
-    channel: 'Google Cloud',
-    start: 10,
-    end: 65,
-    clip: '0:10 a 1:05',
-    duration: '55 s',
-    language: 'inglês, com legenda',
-    published: 'julho de 2025',
-    url: 'https://www.youtube.com/watch?v=zviPaxJDlu4&t=10s',
+    id: 'JENUuD1RjoE',
+    title: 'Prompt Injection: Entenda o ataque e a remediação',
+    channel: 'Guardsi Cybersecurity',
+    start: 146,
+    end: 266,
+    clip: '2:26 a 4:26',
+    duration: '2 min',
+    language: 'português',
+    published: 'outubro de 2025',
+    url: 'https://www.youtube.com/watch?v=JENUuD1RjoE&t=146s',
     // No GitHub Pages o build troca para true e o vídeo toca dentro da página.
     embed: true /*VIDEO_EMBED*/
   };
@@ -1035,7 +1035,7 @@
           ]);
         }))
       ]),
-      el('div', { class: 'actions' }, [go, rank, el('p', { class: 'hint', text: 'Leva cerca de 6 minutos, com um vídeo de 55 s antes.' })])
+      el('div', { class: 'actions' }, [go, rank, el('p', { class: 'hint', text: 'Leva cerca de 7 minutos, com um vídeo de 2 min antes.' })])
     ]));
   }
 
@@ -1045,8 +1045,8 @@
     if (VIDEO.embed) {
       player = el('div', { class: 'video-frame' }, [
         el('iframe', {
-          src: 'https://www.youtube-nocookie.com/embed/' + VIDEO.id + '?start=' + VIDEO.start + '&end=' + VIDEO.end + '&rel=0&cc_load_policy=1&hl=pt-BR',
-          title: 'Vídeo do Google Cloud sobre prompt injection',
+          src: 'https://www.youtube-nocookie.com/embed/' + VIDEO.id + '?start=' + VIDEO.start + '&end=' + VIDEO.end + '&rel=0',
+          title: 'Vídeo sobre os tipos de prompt injection',
           referrerpolicy: 'strict-origin-when-cross-origin',
           allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
           allowfullscreen: true
@@ -1064,8 +1064,8 @@
     back.addEventListener('click', renderIntro);
 
     show('video', el('section', { class: 'video' }, [
-      el('h2', { text: 'Antes de começar: o que é prompt injection' }),
-      el('p', { class: 'context', text: 'Um trecho de ' + VIDEO.duration + ' do canal oficial do Google Cloud explica o conceito com uma analogia e exemplos reais. O vídeo é em inglês, com legenda: para ver em português, abra Configurações → Legendas → Traduzir automaticamente → Português.' }),
+      el('h2', { text: 'Antes de começar: os tipos de prompt injection' }),
+      el('p', { class: 'context', text: 'Em ' + VIDEO.duration + ', a Guardsi Cybersecurity, empresa especializada em testes de invasão (pentest), explica os dois principais tipos de prompt injection: a injeção direta e a indireta.' }),
       el('div', { class: 'video-layout wide' }, [
         player,
         el('div', { class: 'video-info' }, [
@@ -1074,14 +1074,14 @@
             el('span', {}, ['Trecho: ', el('b', { text: VIDEO.clip + ' (' + VIDEO.duration + ')' })]),
             el('span', { text: 'Idioma: ' + VIDEO.language + '. Publicado em ' + VIDEO.published + '.' })
           ]),
-          el('p', { class: 'part-label', text: 'O que o vídeo mostra:' }),
+          el('p', { class: 'part-label', text: 'Os tipos explicados no vídeo:' }),
           el('ul', { class: 'watch-list' }, [
-            el('li', { text: 'Prompt injection é a tentativa de enganar o modelo para que ele ignore a programação original e as regras de segurança e passe a seguir instruções maliciosas.' }),
-            el('li', { text: 'A analogia do improviso: um ator que encena qualquer sugestão gritada pela plateia, sem avaliar se ela é perigosa.' }),
-            el('li', { text: 'Os exemplos: um chatbot de vendas levado a vender um carro por um dólar e um chatbot de banco levado a revelar dados de conta.' })
+            el('li', {}, [el('strong', { text: 'Injeção direta: ' }), 'o atacante digita na própria caixa de texto frases como "ignore as instruções anteriores" para sobrescrever as regras do sistema. Um objetivo comum é fazer o modelo revelar o prompt de sistema, com regras de negócio e informações confidenciais.']),
+            el('li', {}, [el('strong', { text: 'Injeção indireta: ' }), 'a instrução maliciosa não vem de quem conversa com a IA, mas de uma fonte externa que ela processa. No exemplo, uma página web esconde, em fonte branca, um pedido para enviar o histórico de conversas a um e-mail.']),
+            el('li', {}, [el('strong', { text: 'Por que a indireta é mais traiçoeira: ' }), 'o comando fica escondido nos dados, e quem usa a IA nem percebe que foi atacado.'])
           ]),
-          el('p', { class: 'context', text: 'No vídeo, o ataque é digitado direto na conversa (injeção direta). No desafio, você também vai encontrar a injeção indireta, escondida dentro de um e-mail.' }),
-          el('p', { class: 'video-source' }, ['Fonte: ', el('a', { href: VIDEO.url, target: '_blank', rel: 'noopener', text: VIDEO.title }), ', canal oficial do Google Cloud no YouTube.'])
+          el('p', { class: 'context', text: 'A instrução escondida em fonte branca é exatamente o que você vai procurar na etapa 2 do desafio.' }),
+          el('p', { class: 'video-source' }, ['Fonte: ', el('a', { href: VIDEO.url, target: '_blank', rel: 'noopener', text: VIDEO.title }), ', canal da Guardsi Cybersecurity no YouTube (trecho de ' + VIDEO.clip + ').'])
         ])
       ]),
       el('div', { class: 'actions' }, [next, back])
