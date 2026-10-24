@@ -183,6 +183,33 @@
   .stage-list .t{font-weight:600; font-size:15px}
   .stage-list .d{display:block; font-weight:400; font-size:13.5px; color:var(--ink-soft)}
 
+  /* vídeo de abertura */
+  .video-layout{display:grid; grid-template-columns:minmax(0, 300px) minmax(0, 1fr); gap:28px; align-items:start}
+  .video-frame{width:100%; max-width:320px; aspect-ratio:9 / 16; border-radius:14px; overflow:hidden; background:#000; border:1px solid var(--rule)}
+  .video-frame iframe{display:block; width:100%; height:100%; border:0}
+  .video-link{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    gap:6px;
+    width:100%;
+    max-width:320px;
+    aspect-ratio:9 / 16;
+    border-radius:14px;
+    padding:18px;
+    background:var(--ink);
+    color:var(--bg);
+    text-decoration:none;
+  }
+  .video-link .play{font-family:"Space Grotesk", sans-serif; font-weight:700; font-size:18px}
+  .video-link .sub{font-size:13.5px; opacity:.8}
+  .video-info{display:flex; flex-direction:column; gap:14px; min-width:0}
+  .video-meta{display:flex; flex-direction:column; gap:2px; font-size:14px; color:var(--ink-soft)}
+  .video-meta b{color:var(--ink); font-weight:600}
+  .watch-list{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px; max-width:56ch}
+  .video-source{font-size:13px; color:var(--ink-soft)}
+  .video-source a{color:var(--instr)}
+
   /* nickname */
   .nick-form{display:flex; flex-direction:column; gap:18px}
   .field{display:flex; flex-direction:column; gap:6px; max-width:420px}
@@ -447,6 +474,8 @@
   .recap .explain{padding:2px 16px 16px}
 
   @media (max-width:640px){
+    .video-layout{grid-template-columns:1fr}
+    .video-frame, .video-link{margin:0 auto; max-width:300px}
     .options.cards{grid-template-columns:1fr}
     .stage-list{grid-template-columns:1fr}
   }
@@ -499,6 +528,18 @@
   /* ==========================================================
      OBJETIVO E TAXONOMIA DE BLOOM
      ========================================================== */
+  /* Vídeo de abertura: curto (até 2 min) e de fonte de referência. */
+  var VIDEO = {
+    id: 'Ss_kkgp10wo',
+    title: 'Prompt injection: decisões sobre comando oculto em recursos dirigidos ao STJ são destaques no STJN',
+    channel: 'Superior Tribunal de Justiça (STJ)',
+    duration: '50 s',
+    published: 'setembro de 2026',
+    url: 'https://www.youtube.com/watch?v=Ss_kkgp10wo',
+    // No GitHub Pages o build troca para true e o vídeo toca dentro da página.
+    embed: true /*VIDEO_EMBED*/
+  };
+
   var OBJECTIVE = {
     text: 'Reconhecer ataques de prompt injection, diretos e indiretos, avaliar o risco de integrações com IA e montar um fluxo de defesa em camadas.',
     definition: 'Prompt injection é quando um texto que deveria ser só dado passa a ser obedecido como instrução.',
@@ -916,6 +957,7 @@
     playerEl.hidden = !showPlayer;
     if (showPlayer) playerEl.replaceChildren('Jogando como ', el('b', { text: state.nick }));
     if (state.view === 'intro') countEl.textContent = N + ' etapas';
+    else if (state.view === 'video') countEl.textContent = 'Vídeo de abertura';
     else if (state.view === 'nick') countEl.textContent = 'Antes de começar';
     else if (state.view === 'ranking') countEl.textContent = 'Ranking';
     else if (state.view === 'result') countEl.textContent = correctCount() + ' de ' + N + ' acertos';
@@ -951,7 +993,7 @@
   function renderIntro() {
     state.idx = -1;
     var go = el('button', { class: 'btn', type: 'button', text: 'Continuar' });
-    go.addEventListener('click', renderNick);
+    go.addEventListener('click', renderVideo);
     var rank = el('button', { class: 'btn ghost', type: 'button', text: 'Ver ranking da turma' });
     rank.addEventListener('click', renderRanking);
 
@@ -986,11 +1028,60 @@
           ]);
         }))
       ]),
-      el('div', { class: 'actions' }, [go, rank, el('p', { class: 'hint', text: 'Leva cerca de 5 minutos.' })])
+      el('div', { class: 'actions' }, [go, rank, el('p', { class: 'hint', text: 'Leva cerca de 6 minutos, com um vídeo curto antes.' })])
     ]));
   }
 
-  /* ---------- 2. apelido ---------- */
+  /* ---------- 2. vídeo de abertura ---------- */
+  function renderVideo() {
+    var player;
+    if (VIDEO.embed) {
+      player = el('div', { class: 'video-frame' }, [
+        el('iframe', {
+          src: 'https://www.youtube-nocookie.com/embed/' + VIDEO.id + '?rel=0',
+          title: 'Vídeo do STJ sobre prompt injection',
+          referrerpolicy: 'strict-origin-when-cross-origin',
+          allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
+          allowfullscreen: true
+        })
+      ]);
+    } else {
+      player = el('a', { class: 'video-link', href: VIDEO.url, target: '_blank', rel: 'noopener' }, [
+        el('span', { class: 'play', text: 'Assistir no YouTube' }),
+        el('span', { class: 'sub', text: VIDEO.duration + ', abre em nova aba' })
+      ]);
+    }
+    var next = el('button', { class: 'btn', type: 'button', text: 'Continuar para o desafio' });
+    next.addEventListener('click', renderNick);
+    var back = el('button', { class: 'btn ghost', type: 'button', text: 'Voltar' });
+    back.addEventListener('click', renderIntro);
+
+    show('video', el('section', { class: 'video' }, [
+      el('h2', { text: 'Antes de começar: um caso real' }),
+      el('p', { class: 'context', text: 'Em ' + VIDEO.duration + ', o Superior Tribunal de Justiça mostra prompt injection fora do laboratório: comandos escondidos em recursos enviados ao tribunal para tentar enganar a inteligência artificial usada na análise dos processos.' }),
+      el('div', { class: 'video-layout' }, [
+        player,
+        el('div', { class: 'video-info' }, [
+          el('div', { class: 'video-meta' }, [
+            el('span', {}, ['Canal: ', el('b', { text: VIDEO.channel })]),
+            el('span', {}, ['Duração: ', el('b', { text: VIDEO.duration })]),
+            el('span', { text: 'Publicado em ' + VIDEO.published })
+          ]),
+          el('p', { class: 'part-label', text: 'Enquanto assiste, repare:' }),
+          el('ul', { class: 'watch-list' }, [
+            el('li', { text: 'onde o comando estava: dentro do documento, e não numa conversa com a IA;' }),
+            el('li', { text: 'quem seria enganado: a ferramenta de IA que lê os processos, não as pessoas;' }),
+            el('li', { text: 'como o tribunal tratou o caso: como conduta de má-fé, com punição.' })
+          ]),
+          el('p', { class: 'context', text: 'É um caso de injeção indireta, o mesmo tipo de ataque que você vai procurar na etapa 2.' }),
+          el('p', { class: 'video-source' }, ['Fonte: ', el('a', { href: VIDEO.url, target: '_blank', rel: 'noopener', text: VIDEO.title }), ', canal oficial do STJ no YouTube.'])
+        ])
+      ]),
+      el('div', { class: 'actions' }, [next, back])
+    ]));
+  }
+
+  /* ---------- 3. apelido ---------- */
   function renderNick() {
     var saved = store.get(NICK_KEY) || '';
     var input = el('input', {
@@ -1001,7 +1092,7 @@
     var err = el('p', { id: 'nick-err', class: 'err', 'aria-live': 'polite' });
     var start = el('button', { class: 'btn', type: 'submit', text: 'Começar desafio' });
     var back = el('button', { class: 'btn ghost', type: 'button', text: 'Voltar' });
-    back.addEventListener('click', renderIntro);
+    back.addEventListener('click', renderVideo);
     var taken = null, confirmed = '';
     apiRanking().then(function (d) {
       taken = {};

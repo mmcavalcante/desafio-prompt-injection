@@ -3,10 +3,11 @@
 Desafio interativo de Segurança da Informação sobre **prompt injection**, feito para uso em aula com vários alunos ao mesmo tempo.
 
 1. **Objetivo e Taxonomia de Bloom:** a tela inicial mostra o objetivo do desafio e os níveis da Taxonomia de Bloom Revisada trabalhados. O nível que se deseja alcançar é o **Criar**.
-2. **Apelido:** antes de começar, cada aluno escolhe um apelido (de 2 a 20 caracteres). Há um aviso para não usar dados pessoais.
-3. **6 etapas:** cada uma com um tipo de desafio diferente e uma explicação educativa depois de cada resposta.
-4. **Score de 0 a 100:** `acertos ÷ 6 × 100`, arredondado. Faixas: 80–100 *Bem defendido*, 50–79 *Em alerta*, 0–49 *Exposto*.
-5. **Ranking da turma:** mostra o melhor score de cada apelido. Em caso de empate, fica na frente quem terminou mais rápido. O ranking se atualiza sozinho a cada 15 segundos.
+2. **Vídeo de abertura:** um vídeo de 50 segundos do canal oficial do Superior Tribunal de Justiça (STJ) mostra um caso real de prompt injection em processos, com três pontos para observar. O vídeo toca dentro da página.
+3. **Apelido:** antes de começar, cada aluno escolhe um apelido (de 2 a 20 caracteres). Há um aviso para não usar dados pessoais.
+4. **6 etapas:** cada uma com um tipo de desafio diferente e uma explicação educativa depois de cada resposta.
+5. **Score de 0 a 100:** `acertos ÷ 6 × 100`, arredondado. Faixas: 80–100 *Bem defendido*, 50–79 *Em alerta*, 0–49 *Exposto*.
+6. **Ranking da turma:** mostra o melhor score de cada apelido. Em caso de empate, fica na frente quem terminou mais rápido. O ranking se atualiza sozinho a cada 15 segundos.
 
 | Etapa | Tipo de desafio | Nível de Bloom |
 | --- | --- | --- |
