@@ -208,6 +208,8 @@
   .video-meta b{color:var(--ink); font-weight:600}
   .watch-list{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px; max-width:56ch}
   .video-source{font-size:13px; color:var(--ink-soft)}
+  .video-layout.wide{grid-template-columns:1fr; gap:20px}
+  .video-layout.wide .video-frame, .video-layout.wide .video-link{max-width:100%; aspect-ratio:16 / 9}
   .video-source a{color:var(--instr)}
 
   /* nickname */
@@ -529,13 +531,18 @@
      OBJETIVO E TAXONOMIA DE BLOOM
      ========================================================== */
   /* Vídeo de abertura: curto (até 2 min) e de fonte de referência. */
+  // Trecho de 0:10 a 1:05: só a explicação de prompt injection, sem a parte sobre o produto.
   var VIDEO = {
-    id: 'Ss_kkgp10wo',
-    title: 'Prompt injection: decisões sobre comando oculto em recursos dirigidos ao STJ são destaques no STJN',
-    channel: 'Superior Tribunal de Justiça (STJ)',
-    duration: '50 s',
-    published: 'setembro de 2026',
-    url: 'https://www.youtube.com/watch?v=Ss_kkgp10wo',
+    id: 'zviPaxJDlu4',
+    title: 'Is Your LLM safe from prompt injection?',
+    channel: 'Google Cloud',
+    start: 10,
+    end: 65,
+    clip: '0:10 a 1:05',
+    duration: '55 s',
+    language: 'inglês, com legenda',
+    published: 'julho de 2025',
+    url: 'https://www.youtube.com/watch?v=zviPaxJDlu4&t=10s',
     // No GitHub Pages o build troca para true e o vídeo toca dentro da página.
     embed: true /*VIDEO_EMBED*/
   };
@@ -1028,7 +1035,7 @@
           ]);
         }))
       ]),
-      el('div', { class: 'actions' }, [go, rank, el('p', { class: 'hint', text: 'Leva cerca de 6 minutos, com um vídeo curto antes.' })])
+      el('div', { class: 'actions' }, [go, rank, el('p', { class: 'hint', text: 'Leva cerca de 6 minutos, com um vídeo de 55 s antes.' })])
     ]));
   }
 
@@ -1038,8 +1045,8 @@
     if (VIDEO.embed) {
       player = el('div', { class: 'video-frame' }, [
         el('iframe', {
-          src: 'https://www.youtube-nocookie.com/embed/' + VIDEO.id + '?rel=0',
-          title: 'Vídeo do STJ sobre prompt injection',
+          src: 'https://www.youtube-nocookie.com/embed/' + VIDEO.id + '?start=' + VIDEO.start + '&end=' + VIDEO.end + '&rel=0&cc_load_policy=1&hl=pt-BR',
+          title: 'Vídeo do Google Cloud sobre prompt injection',
           referrerpolicy: 'strict-origin-when-cross-origin',
           allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
           allowfullscreen: true
@@ -1048,7 +1055,7 @@
     } else {
       player = el('a', { class: 'video-link', href: VIDEO.url, target: '_blank', rel: 'noopener' }, [
         el('span', { class: 'play', text: 'Assistir no YouTube' }),
-        el('span', { class: 'sub', text: VIDEO.duration + ', abre em nova aba' })
+        el('span', { class: 'sub', text: 'Trecho de ' + VIDEO.clip + ' (' + VIDEO.duration + '), abre em nova aba' })
       ]);
     }
     var next = el('button', { class: 'btn', type: 'button', text: 'Continuar para o desafio' });
@@ -1057,24 +1064,24 @@
     back.addEventListener('click', renderIntro);
 
     show('video', el('section', { class: 'video' }, [
-      el('h2', { text: 'Antes de começar: um caso real' }),
-      el('p', { class: 'context', text: 'Em ' + VIDEO.duration + ', o Superior Tribunal de Justiça mostra prompt injection fora do laboratório: comandos escondidos em recursos enviados ao tribunal para tentar enganar a inteligência artificial usada na análise dos processos.' }),
-      el('div', { class: 'video-layout' }, [
+      el('h2', { text: 'Antes de começar: o que é prompt injection' }),
+      el('p', { class: 'context', text: 'Um trecho de ' + VIDEO.duration + ' do canal oficial do Google Cloud explica o conceito com uma analogia e exemplos reais. O vídeo é em inglês, com legenda: para ver em português, abra Configurações → Legendas → Traduzir automaticamente → Português.' }),
+      el('div', { class: 'video-layout wide' }, [
         player,
         el('div', { class: 'video-info' }, [
           el('div', { class: 'video-meta' }, [
             el('span', {}, ['Canal: ', el('b', { text: VIDEO.channel })]),
-            el('span', {}, ['Duração: ', el('b', { text: VIDEO.duration })]),
-            el('span', { text: 'Publicado em ' + VIDEO.published })
+            el('span', {}, ['Trecho: ', el('b', { text: VIDEO.clip + ' (' + VIDEO.duration + ')' })]),
+            el('span', { text: 'Idioma: ' + VIDEO.language + '. Publicado em ' + VIDEO.published + '.' })
           ]),
-          el('p', { class: 'part-label', text: 'Enquanto assiste, repare:' }),
+          el('p', { class: 'part-label', text: 'O que o vídeo mostra:' }),
           el('ul', { class: 'watch-list' }, [
-            el('li', { text: 'onde o comando estava: dentro do documento, e não numa conversa com a IA;' }),
-            el('li', { text: 'quem seria enganado: a ferramenta de IA que lê os processos, não as pessoas;' }),
-            el('li', { text: 'como o tribunal tratou o caso: como conduta de má-fé, com punição.' })
+            el('li', { text: 'Prompt injection é a tentativa de enganar o modelo para que ele ignore a programação original e as regras de segurança e passe a seguir instruções maliciosas.' }),
+            el('li', { text: 'A analogia do improviso: um ator que encena qualquer sugestão gritada pela plateia, sem avaliar se ela é perigosa.' }),
+            el('li', { text: 'Os exemplos: um chatbot de vendas levado a vender um carro por um dólar e um chatbot de banco levado a revelar dados de conta.' })
           ]),
-          el('p', { class: 'context', text: 'É um caso de injeção indireta, o mesmo tipo de ataque que você vai procurar na etapa 2.' }),
-          el('p', { class: 'video-source' }, ['Fonte: ', el('a', { href: VIDEO.url, target: '_blank', rel: 'noopener', text: VIDEO.title }), ', canal oficial do STJ no YouTube.'])
+          el('p', { class: 'context', text: 'No vídeo, o ataque é digitado direto na conversa (injeção direta). No desafio, você também vai encontrar a injeção indireta, escondida dentro de um e-mail.' }),
+          el('p', { class: 'video-source' }, ['Fonte: ', el('a', { href: VIDEO.url, target: '_blank', rel: 'noopener', text: VIDEO.title }), ', canal oficial do Google Cloud no YouTube.'])
         ])
       ]),
       el('div', { class: 'actions' }, [next, back])
