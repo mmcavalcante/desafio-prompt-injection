@@ -23,7 +23,9 @@ self.addEventListener('fetch', function (e) {
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
   e.respondWith(
-    fetch(req)
+    // cache: 'no-cache' confere no servidor se há versão nova (resposta 304 quando não há),
+    // em vez de usar a cópia de até 10 minutos que o GitHub Pages manda guardar.
+    fetch(req, { cache: 'no-cache' })
       .then(function (res) {
         if (res.ok) {
           var copy = res.clone();
