@@ -446,10 +446,6 @@
   .recap details[open] .chev{transform:rotate(90deg)}
   .recap .explain{padding:2px 16px 16px}
 
-  .foot{border-top:1px solid var(--rule)}
-  .foot .wrap{padding-block:16px 28px; font-size:13px; color:var(--ink-soft); display:flex; flex-direction:column; gap:8px}
-  .install-row:has(> [hidden]){display:none}
-
   @media (max-width:640px){
     .options.cards{grid-template-columns:1fr}
     .stage-list{grid-template-columns:1fr}
@@ -484,13 +480,6 @@
     <noscript><p>Este desafio precisa de JavaScript ativado no navegador.</p></noscript>
   </div>
 </main>
-
-<footer class="foot">
-  <div class="wrap">
-    <p>Material de apoio da aula de Segurança da Informação sobre prompt injection. O ranking guarda só o apelido, o score, os acertos e o tempo de cada tentativa; suas respostas em cada etapa ficam no seu navegador.</p>
-    <p class="install-row"><button class="link-btn" type="button" id="installBtn" hidden>Instalar o desafio neste aparelho</button></p>
-  </div>
-</footer>
 
 <script>
 (function () {
@@ -1420,21 +1409,6 @@
     rv.load();
     startPolling(rv.load);
   }
-
-  /* ---------- instalação como app (quando publicado no github.io) ---------- */
-  var installBtn = document.getElementById('installBtn');
-  var installPrompt = null;
-  window.addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    installPrompt = e;
-    installBtn.hidden = false;
-  });
-  installBtn.addEventListener('click', function () {
-    if (!installPrompt) return;
-    installPrompt.prompt();
-    installPrompt.userChoice.then(function () { installPrompt = null; installBtn.hidden = true; }, function () {});
-  });
-  window.addEventListener('appinstalled', function () { installBtn.hidden = true; });
 
   if (params.has('ranking') || window.location.hash === '#ranking') renderRanking();
   else renderIntro();

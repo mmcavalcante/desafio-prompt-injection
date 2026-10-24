@@ -19,7 +19,7 @@ Desafio interativo de Segurança da Informação sobre **prompt injection**, fei
 
 ## Instalar no celular ou no computador
 
-Publicado no GitHub Pages, o desafio também pode ser instalado como app (PWA). No Chrome ou no Edge, aparece o link "Instalar o desafio neste aparelho" no rodapé, ou o ícone de instalar na barra de endereço. No iPhone, use Safari → Compartilhar → "Adicionar à Tela de Início". Com internet, o app sempre carrega a versão mais nova. Sem internet, abre a última versão guardada, mas o ranking só funciona on-line.
+Publicado no GitHub Pages, o desafio também pode ser instalado como app (PWA). No Chrome ou no Edge, use o ícone de instalar na barra de endereço. No iPhone, use Safari → Compartilhar → "Adicionar à Tela de Início". Com internet, o app sempre carrega a versão mais nova. Sem internet, abre a última versão guardada, mas o ranking só funciona on-line.
 
 ## Endereços úteis em aula
 
