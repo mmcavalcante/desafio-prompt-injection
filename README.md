@@ -1,32 +1,51 @@
 # Desafio Prompt Injection
 
-Desafio interativo de Segurança da Informação sobre **prompt injection**, feito para uso em aula com vários alunos ao mesmo tempo.
+Aula-desafio de **Segurança da Informação** sobre **prompt injection**, preparada para a segunda avaliação somativa da disciplina Educação em Computação (aula online de 20 a 25 minutos, pelo Google Meet, com ouvintes). O app conduz a aula inteira: abertura com os objetivos da disciplina, 6 atividades de cerca de 3 minutos e fechamento com score e ranking da turma.
 
-1. **Objetivo e Taxonomia de Bloom:** a tela inicial mostra o objetivo do desafio e os níveis da Taxonomia de Bloom Revisada trabalhados. O nível que se deseja alcançar é o **Criar**.
-2. **Vídeo de abertura:** um trecho de 2 min (2:26 a 4:26) do vídeo *Prompt Injection: Entenda o ataque e a remediação*, da Guardsi Cybersecurity, em português, que explica os dois tipos de prompt injection (direta e indireta). A página traz um resumo de cada tipo, e o vídeo toca dentro dela.
-3. **Apelido:** antes de começar, cada aluno escolhe um apelido (de 2 a 20 caracteres). Há um aviso para não usar dados pessoais.
-4. **6 etapas:** cada uma com um tipo de desafio diferente e uma explicação educativa depois de cada resposta.
-5. **Score de 0 a 100:** `acertos ÷ 6 × 100`, arredondado. Faixas: 80–100 *Bem defendido*, 50–79 *Em alerta*, 0–49 *Exposto*.
-6. **Ranking da turma:** mostra o melhor score de cada apelido. Em caso de empate, fica na frente quem terminou mais rápido. O ranking se atualiza sozinho a cada 15 segundos.
+## Como a aula funciona
 
-| Etapa | Tipo de desafio | Nível de Bloom |
+| Momento | Duração | O que acontece |
 | --- | --- | --- |
-| 1 | Reconheça o ataque (escolha única) | Entender |
-| 2 | Ache a injeção (escolher a linha maliciosa de um e-mail) | Aplicar |
-| 3 | Verdadeiro ou falso | Analisar |
-| 4 | Monte a defesa (múltipla escolha) | Avaliar |
-| 5 | Avalie o risco (comparar integrações) | Avaliar |
-| 6 | Ordene o fluxo seguro (ordenação) | Criar |
+| Abertura | ~2 min | Objetivos da disciplina (Taxonomia de Bloom revisada) e escolha do apelido |
+| Atividades 1 a 6 | ~18 min | 6 atividades de ~3 min, com relógio da atividade na tela e explicação educativa após cada resposta |
+| Fechamento | ~2 min | Score de 0 a 100, ranking da turma e revisão das explicações |
 
-## Instalar no celular ou no computador
+| Atividade | Tipo | Nível de Bloom | Andaime (ferramenta pedagógica) |
+| --- | --- | --- | --- |
+| 1. Vídeo + reação | Teórica | Lembrar / Entender | Vídeo em português (Guardsi Cybersecurity, trecho 2:26–4:26) + pergunta + reação no chat |
+| 2. Reconheça o ataque | Interativa | Entender | Cartões de resposta |
+| 3. Ache a injeção | Interativa | Aplicar | E-mail simulado com linha maliciosa |
+| 4. Pesquisa relâmpago | Interativa | Analisar | Artigo real indexado no JCR (Kwon & Pak, 2024, *Electronics*, DOI aberto) |
+| 5. Jogo: rodada de defesa (3 rodadas) | Jogo educativo | Avaliar | Quiz com pontos e placar da turma |
+| 6. Ordene o fluxo seguro | Interativa | Criar | Ordenação de passos |
 
-Publicado no GitHub Pages, o desafio também pode ser instalado como app (PWA). No Chrome ou no Edge, use o ícone de instalar na barra de endereço. No iPhone, use Safari → Compartilhar → "Adicionar à Tela de Início". Com internet, o app sempre carrega a versão mais nova. Sem internet, abre a última versão guardada, mas o ranking só funciona on-line.
+**Score:** são 8 desafios nas 6 atividades (a atividade 5 tem 3 rodadas): `acertos ÷ 8 × 100`, arredondado. Faixas: 80–100 *Bem defendido*, 50–79 *Em alerta*, 0–49 *Exposto*. O ranking guarda o melhor score de cada apelido; empate é decidido pelo menor tempo.
+
+## Critérios da avaliação → onde o app atende
+
+| Critério do documento | Como o app atende |
+| --- | --- |
+| Duração de 20 a 25 min | Cronograma de ~22 min na abertura; relógio de 3 min por atividade |
+| Objetivos da disciplina no início, por Bloom | Primeira tela, com os 5 níveis e a atividade que trabalha cada um |
+| 6 atividades diferentes, de 3 min cada | Atividades 1–6, formatos distintos, relógio por atividade |
+| ≥80% interativas com andaimes; ≤20% teóricas | 5 de 6 interativas (83%); só a Atividade 1 é teórica (17%) |
+| 1 pesquisa em fonte confiável (artigo com JCR) | Atividade 4: artigo de Kwon & Pak (2024), *Electronics* (MDPI, JCR), acesso aberto |
+| 1 jogo educativo sobre o tema | Atividade 5: quiz em 3 rodadas com pontos e ranking |
+| Não ser "só" um formato único | Vídeo, análise de e-mail, pesquisa, jogo, ordenação e chat do Meet |
+| Proatividade dos estudantes; ouvintes | Cada atividade pede ação (responder, procurar, ordenar, compartilhar no chat); apelidos sem dados pessoais |
+| Tema ≠ 1ª avaliação, ligado à Computação | Prompt injection (a 1ª foi senhas/MFA) |
+| Plataforma sem cadastro/download | Roda no navegador; nada para instalar; aviso prévio desnecessário |
+| Treinar e cronometrar antes | Dá para ensaiar a aula inteira sozinho; use `?turma=ensaio` para não poluir o ranking |
 
 ## Endereços úteis em aula
 
 - Desafio: `https://<usuario>.github.io/<repositorio>/`
 - Ranking em tela cheia, para projetar no Meet: acrescente `?ranking` ao endereço.
 - Ranking separado por turma: acrescente `?turma=nome-da-turma` (por exemplo, `?turma=novembro`). Para ver o ranking dessa turma, use `?turma=novembro&ranking`.
+
+## Instalar no celular ou no computador
+
+Publicado no GitHub Pages, o desafio também pode ser instalado como app (PWA). No Chrome ou no Edge, use o ícone de instalar na barra de endereço. No iPhone, use Safari → Compartilhar → "Adicionar à Tela de Início". Com internet, o app sempre carrega a versão mais nova. Sem internet, abre a última versão guardada, mas o ranking só funciona on-line.
 
 ## Ranking compartilhado (planilha Google)
 
@@ -50,6 +69,6 @@ Para zerar o ranking antes de uma aula, rode a função `limparRanking` no edito
 3. Em **Build and deployment → Source**, escolha **Deploy from a branch**. Em **Branch**, escolha `main` e a pasta `/ (root)`. Clique em **Save**.
 4. Depois de 1 a 2 minutos, o desafio fica disponível em `https://<usuario>.github.io/<repositorio>/`.
 
-## Editar perguntas e explicações
+## Editar o conteúdo
 
-Todo o conteúdo fica no `<script>` do `index.html`. O objetivo e os níveis de Bloom ficam em `OBJECTIVE` e `BLOOM`. As etapas ficam em `STAGES`: cada etapa tem `title`, `options` (marque a certa com `correct: true`) e `explain` (as partes da explicação). As faixas do score ficam em `LEVELS`.
+Tudo fica no `<script>` do `index.html`: os objetivos da disciplina em `OBJETIVOS`, o resumo das atividades em `ATIVIDADES`, os desafios em `STAGES` (cada um com `title`, `options` — marque a certa com `correct: true` — e `explain`), o vídeo em `VIDEO` e as faixas do score em `LEVELS`.
