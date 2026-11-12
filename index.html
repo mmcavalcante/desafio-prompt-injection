@@ -1548,6 +1548,8 @@
     full.addEventListener('click', renderRanking);
     var change = el('button', { class: 'btn ghost', type: 'button', text: 'Trocar apelido' });
     change.addEventListener('click', renderNick);
+    var home = el('button', { class: 'btn ghost', type: 'button', text: 'Voltar ao início' });
+    home.addEventListener('click', renderIntro);
 
     var recap = el('ol', { class: 'recap' }, STAGES.map(function (s, k) {
       var ok = state.results[k] && state.results[k].correct;
@@ -1577,7 +1579,7 @@
       el('div', { class: 'share' }, [shareP, el('div', { class: 'actions' }, [copy, status])]),
       el('h3', { text: 'Revise as explicações' }),
       recap,
-      el('div', { class: 'actions' }, [again, full, change])
+      el('div', { class: 'actions' }, [again, full, change, home])
     ]));
     animateGauge(g, score);
     submit();
