@@ -168,6 +168,9 @@
   .schedule .when{flex:0 0 96px; font-family:"JetBrains Mono", ui-monospace, monospace; font-size:12.5px; color:var(--ink-soft); white-space:nowrap}
   .chip-timer{font-variant-numeric:tabular-nums}
   a.btn{display:inline-flex; align-items:center; gap:7px; text-decoration:none; width:fit-content}
+  .prep{display:flex; flex-direction:column; gap:8px}
+  .prep .actions{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+  .stage-body{display:flex; flex-direction:column; gap:16px; min-width:0}
   .cite-ref{font-size:14px}
   .cite-note{font-size:13px; color:var(--ink-soft)}
 
@@ -530,7 +533,7 @@
     { name: 'Reconheça o ataque', type: 'Interativa', bloom: 'Entender', tool: 'cartões de resposta' },
     { name: 'Ache a injeção', type: 'Interativa', bloom: 'Aplicar', tool: 'e-mail simulado' },
     { name: 'Pesquisa relâmpago', type: 'Interativa', bloom: 'Analisar', tool: 'artigo científico com JCR' },
-    { name: 'Jogo: rodada de defesa', type: 'Jogo educativo', bloom: 'Avaliar', tool: 'quiz com placar da turma' },
+    { name: 'Jogo: rodada de defesa', type: 'Jogo educativo', bloom: 'Avaliar', tool: 'pesquisa rápida na OWASP + quiz com placar da turma' },
     { name: 'Ordene o fluxo seguro', type: 'Interativa', bloom: 'Criar', tool: 'ordenação de passos' }
   ];
 
@@ -638,6 +641,11 @@
       atividade: 5,
       kind: 'Jogo educativo',
       round: 'rodada 1 de 3',
+      prep: {
+        source: 'OWASP Gen AI Security Project, "LLM01:2025 Prompt Injection"',
+        url: 'https://genai.owasp.org/llmrisk/llm01-prompt-injection/',
+        task: 'Abra a página e vá até a seção "Prevention and Mitigation Strategies". O texto diz que existe um método infalível para prevenir prompt injection?'
+      },
       type: 'truefalse',
       mechanic: 'Jogo · verdadeiro ou falso',
       blurb: 'uma defesa popular funciona mesmo?',
@@ -660,6 +668,11 @@
       atividade: 5,
       kind: 'Jogo educativo',
       round: 'rodada 2 de 3',
+      prep: {
+        source: 'OWASP Gen AI Security Project, "LLM01:2025 Prompt Injection"',
+        url: 'https://genai.owasp.org/llmrisk/llm01-prompt-injection/',
+        task: 'Na mesma seção de mitigação, procure as medidas que falam de privilégio mínimo, aprovação humana e conteúdo externo não confiável. Anote quais aparecem.'
+      },
       type: 'multi',
       mechanic: 'Jogo · monte a defesa',
       blurb: 'escolha as medidas que reduzem o risco',
@@ -685,6 +698,11 @@
       atividade: 5,
       kind: 'Jogo educativo',
       round: 'rodada 3 de 3',
+      prep: {
+        source: 'OWASP Gen AI Security Project, "LLM06:2025 Excessive Agency"',
+        url: 'https://genai.owasp.org/llmrisk/llm062025-excessive-agency/',
+        task: 'Abra a página e encontre as três causas do risco (funcionalidade, permissões e autonomia em excesso). O que aumenta o estrago quando o modelo é enganado?'
+      },
       type: 'risk',
       mechanic: 'Jogo · avalie o risco',
       blurb: 'qual integração tem mais a perder?',
@@ -1122,6 +1140,19 @@
       ', canal ' + VIDEO.channel + ' (trecho ' + VIDEO.clip + ', ' + VIDEO.duration + ', em ' + VIDEO.language + ').'
     ]);
   }
+  function prepNode(p, onDone) {
+    var go = el('button', { class: 'btn', type: 'button', text: 'Já pesquisei: ver a pergunta' });
+    go.addEventListener('click', function () { onDone(); });
+    return el('div', { class: 'snippet prep' }, [
+      el('p', { class: 'prep-title' }, [el('b', { text: 'Pesquise antes de responder (cerca de 1 minuto)' })]),
+      el('p', { class: 'cite-ref', text: 'Fonte: ' + p.source }),
+      el('p', { class: 'cite-note', text: 'O que procurar: ' + p.task }),
+      el('div', { class: 'actions' }, [
+        el('a', { class: 'btn ghost', href: p.url, target: '_blank', rel: 'noopener' }, ['Abrir a fonte (nova aba)']),
+        go
+      ])
+    ]);
+  }
   function researchNode(r) {
     return el('div', { class: 'snippet' }, [
       el('p', { class: 'cite-ref', text: r.citation }),
@@ -1355,15 +1386,27 @@
       s.video ? videoSourceNode() : null,
       s.research ? researchNode(s.research) : null,
       s.snippet ? snippetNode(s.snippet) : null,
+      s.prep ? prepNode(s.prep, function () {
+        prepBox.hidden = true;
+        body.hidden = false;
+        var first = body.querySelector('input, .mv, button');
+        if (first) first.focus({ preventScroll: true });
+        body.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      }) : null
+    ]);
+    var prepBox = sec.lastChild && s.prep ? sec.lastChild : null;
+    var body = el('div', { class: 'stage-body' }, [
       s.statement ? el('p', { class: 'statement', text: s.statement }) : null,
       ch.node
     ]);
+    if (prepBox) body.hidden = true;
+    sec.appendChild(body);
 
     var confirm = el('button', { class: 'btn', type: 'button', text: 'Confirmar resposta' });
     var hint = el('p', { class: 'hint', text: s.hint || 'Escolha uma opção para confirmar.' });
     var actions = el('div', { class: 'actions' }, [confirm, hint]);
     var fb = el('div', { class: 'feedback', hidden: true });
-    sec.appendChild(actions);
+    body.appendChild(actions);
     sec.appendChild(fb);
 
     function sync() {

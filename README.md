@@ -16,7 +16,7 @@ Aula-desafio de **Segurança da Informação** sobre **prompt injection**, prepa
 | 2. Reconheça o ataque | Interativa | Entender | Cartões de resposta |
 | 3. Ache a injeção | Interativa | Aplicar | E-mail simulado com linha maliciosa |
 | 4. Pesquisa relâmpago | Interativa | Analisar | Artigo real indexado no JCR (Kwon & Pak, 2024, *Electronics*, DOI aberto) |
-| 5. Jogo: rodada de defesa (3 rodadas) | Jogo educativo | Avaliar | Quiz com pontos e placar da turma |
+| 5. Jogo: rodada de defesa (3 rodadas) | Jogo educativo | Avaliar | Pesquisa rápida na OWASP (Gen AI Security Project) antes de cada rodada + quiz com pontos e placar da turma |
 | 6. Ordene o fluxo seguro | Interativa | Criar | Ordenação de passos |
 
 **Score:** são 8 desafios nas 6 atividades (a atividade 5 tem 3 rodadas): `acertos ÷ 8 × 100`, arredondado. Faixas: 80–100 *Bem defendido*, 50–79 *Em alerta*, 0–49 *Exposto*. O ranking guarda o melhor score de cada apelido; empate é decidido pelo menor tempo.
@@ -30,7 +30,7 @@ Aula-desafio de **Segurança da Informação** sobre **prompt injection**, prepa
 | 6 atividades diferentes, de 3 min cada | Atividades 1–6, formatos distintos, relógio por atividade |
 | ≥80% interativas com andaimes; ≤20% teóricas | 5 de 6 interativas (83%); só a Atividade 1 é teórica (17%) |
 | 1 pesquisa em fonte confiável (artigo com JCR) | Atividade 4: artigo de Kwon & Pak (2024), *Electronics* (MDPI, JCR), acesso aberto |
-| 1 jogo educativo sobre o tema | Atividade 5: quiz em 3 rodadas com pontos e ranking |
+| 1 jogo educativo sobre o tema | Atividade 5: em cada rodada, o aluno pesquisa numa fonte da OWASP e só depois vê a pergunta; 3 rodadas com pontos e ranking |
 | Não ser "só" um formato único | Vídeo, análise de e-mail, pesquisa, jogo, ordenação e chat do Meet |
 | Proatividade dos estudantes; ouvintes | Cada atividade pede ação (responder, procurar, ordenar, compartilhar no chat); apelidos sem dados pessoais |
 | Tema ≠ 1ª avaliação, ligado à Computação | Prompt injection (a 1ª foi senhas/MFA) |
